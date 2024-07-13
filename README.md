@@ -12,5 +12,5 @@ Install Node.js
 Below is the Ngrok Domain
 
 ```sh
-ngrok http --domain=frank-seasnail-suited.ngrok-free.app 80
+ngrok http --domain=frank-seasnail-suited.ngrok-free.app 3000
 ```
