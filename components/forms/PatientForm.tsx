@@ -12,9 +12,12 @@ import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
+import SubmitButton from "../SubmitButton";
 // import SubmitButton from "../SubmitButton";
 
 const PatientForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
@@ -63,6 +66,8 @@ const PatientForm = () => {
           label="Phone number"
           placeholder="(555) 123-4567"
         />
+
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   );
