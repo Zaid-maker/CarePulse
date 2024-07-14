@@ -8,29 +8,23 @@ import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
 // import { createUser } from "@/lib/actions/patient.actions";
-// import { UserFormValidation } from "@/lib/validation";
+import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 // import SubmitButton from "../SubmitButton";
 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-});
-
 const PatientForm = () => {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  function onSubmit(values: z.infer<typeof UserFormValidation>) {
     console.log(values);
   }
 
