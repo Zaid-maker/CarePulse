@@ -28,7 +28,19 @@ const PatientForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof UserFormValidation>) {
-    console.log(values);
+    setIsLoading(true);
+
+    try {
+      const user = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+      };
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
   }
 
   return (
