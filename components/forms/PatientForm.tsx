@@ -47,6 +47,11 @@ const PatientForm = () => {
 
         <CustomFormField
           control={form.control}
+          name="name"
+          label="Full name"
+          placeholder="John Doe"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="user"
         />
         <Button type="submit">Submit</Button>
       </form>
