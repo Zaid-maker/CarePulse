@@ -56,13 +56,38 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             />
           )}
           <FormControl>
-          <Input
+            <Input
               placeholder={props.placeholder}
               {...field}
               className="shad-input border-0"
             />
           </FormControl>
         </div>
+      );
+    case FormFieldType.TEXTAREA:
+      return (
+        <FormControl>
+          <Textarea
+            placeholder={props.placeholder}
+            {...field}
+            className="shad-textArea"
+            disabled={props.disabled}
+          />
+        </FormControl>
+      );
+    case FormFieldType.PHONE_INPUT:
+      return (
+        <FormControl>
+          <PhoneInput
+            defaultCountry="US"
+            placeholder={props.placeholder}
+            international
+            withCountryCallingCode
+            value={field.value as E164Number | undefined}
+            onChange={field.onChange}
+            className="input-phone"
+          />
+        </FormControl>
       );
     default:
       return null;
@@ -78,7 +103,7 @@ const CustomFormField = (props: CustomProps) => {
       name={name}
       render={({ field }) => (
         <FormItem className="flex-1">
-           <FormLabel className="shad-input-label">{label}</FormLabel>
+          <FormLabel className="shad-input-label">{label}</FormLabel>
           <RenderInput field={field} props={props} />
           <FormMessage className="shad-error" />
         </FormItem>
