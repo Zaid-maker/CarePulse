@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import CustomFormField from "../CustomFormField";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -44,21 +45,8 @@ const PatientForm = () => {
           <p className="text-dark-700">Get started with appointments.</p>
         </section>
 
-        <FormField
+        <CustomFormField
           control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
         />
         <Button type="submit">Submit</Button>
       </form>
