@@ -7,15 +7,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Form } from "@/components/ui/form";
-// import { createUser } from "@/lib/actions/patient.actions";
+import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
-// import SubmitButton from "../SubmitButton";
 
 const PatientForm = () => {
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -27,7 +27,7 @@ const PatientForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof UserFormValidation>) {
+  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
 
     try {
@@ -36,6 +36,12 @@ const PatientForm = () => {
         email: values.email,
         phone: values.phone,
       };
+
+      const newUser = await createUser(user)
+
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
     }
