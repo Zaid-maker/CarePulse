@@ -50,6 +50,7 @@ export const getUser = async (userId: string) => {
   }
 };
 
+// TODO: createPatient
 export const createPatient = async (userId: string) => {};
 
 export const getPatient = async (userId: string) => {
