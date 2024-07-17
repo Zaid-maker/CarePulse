@@ -9,7 +9,7 @@ import { z } from "zod";
 
 import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
-// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
 import {
   Doctors,
@@ -89,14 +89,14 @@ const RegisterForm = ({ user }: { user: User }) => {
               label="Date of birth"
             />
 
-<CustomFormField
+            <CustomFormField
               fieldType={FormFieldType.SKELETON}
               control={form.control}
               name="gender"
               label="Gender"
               renderSkeleton={(field) => (
                 <FormControl>
-                  {/* <RadioGroup
+                  <RadioGroup
                     className="flex h-11 gap-6 xl:justify-between"
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -109,7 +109,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         </Label>
                       </div>
                     ))}
-                  </RadioGroup> */}
+                  </RadioGroup>
                 </FormControl>
               )}
             />
