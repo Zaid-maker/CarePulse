@@ -1,13 +1,14 @@
-import { getPatient, getUser } from "@/lib/actions/patient.actions";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const [user, patient] = await Promise.all([getUser(userId), getPatient(userId)]);
-  const user = await getUser(userId)
-  const patient = await getPatient(userId)
+// import RegisterForm from "@/components/forms/RegisterForm";
+import { getPatient, getUser } from "@/lib/actions/patient.actions";
 
-  if (patient) {
+const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const user = await getUser(userId);
+  const patient = await getPatient(userId);
+
+  if (patient) redirect(`/patients/${userId}/new-appointment`);
 
   return (
     <div className="flex h-screen max-h-screen">
