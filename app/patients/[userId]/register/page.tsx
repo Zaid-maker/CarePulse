@@ -3,6 +3,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const [user, patient] = await Promise.all([getUser(userId), getPatient(userId)]);
   const user = await getUser(userId)
   const patient = await getPatient(userId)
 
