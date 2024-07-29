@@ -41,12 +41,18 @@ export const getUser = async (userId: string) => {
   try {
     const user = await users.get(userId);
 
-    return parseStringify(user);
+    if (user) {
+      return parseStringify(user);
+    } else {
+      console.warn(`User not found for userId: ${userId}`);
+      return null; // Explicitly handle cases where user is not found
+    }
   } catch (error) {
     console.error(
       "An error occurred while retrieving the user details:",
       error
     );
+    throw error; // Optionally rethrow to handle further up the stack
   }
 };
 
