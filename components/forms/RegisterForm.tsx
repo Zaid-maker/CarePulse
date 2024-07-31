@@ -23,7 +23,7 @@ import { PatientFormValidation } from "@/lib/validation";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
-// import { FileUploader } from "../FileUploader";
+import { FileUploader } from "../FileUploader";
 import SubmitButton from "../SubmitButton";
 
 const RegisterForm = ({ user }: { user: User }) => {
@@ -277,7 +277,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             label="Scanned Copy of Identification Document"
             renderSkeleton={(field) => (
               <FormControl>
-                {/* <FileUploader files={field.value} onChange={field.onChange} /> */}
+                <FileUploader files={field.value} onChange={field.onChange} />
               </FormControl>
             )}
           />
