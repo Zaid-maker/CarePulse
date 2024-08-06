@@ -43,8 +43,8 @@ const RegisterForm = ({ user }: { user: User }) => {
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
+    // Store file info in form data as
     let formData;
-
     if (
       values.identificationDocument &&
       values.identificationDocument?.length > 0
@@ -113,6 +113,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h2 className="sub-header">Personal Information</h2>
           </div>
 
+          {/* NAME */}
+
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
@@ -122,6 +124,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             iconAlt="user"
           />
 
+          {/* EMAIL & PHONE */}
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -142,6 +145,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
+          {/* BirthDate & Gender */}
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.DATE_PICKER}
@@ -176,6 +180,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
+          {/* Address & Occupation */}
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -194,6 +199,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             />
           </div>
 
+          {/* Emergency Contact Name & Emergency Contact Number */}
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
@@ -218,11 +224,12 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h2 className="sub-header">Medical Information</h2>
           </div>
 
+          {/* PRIMARY CARE PHYSICIAN */}
           <CustomFormField
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="primaryPhysician"
-            label="Primary Care Physician"
+            label="Primary care physician"
             placeholder="Select a physician"
           >
             {Doctors.map((doctor, i) => (
