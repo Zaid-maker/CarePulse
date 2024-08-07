@@ -1,3 +1,4 @@
+import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import Image from "next/image";
 import React from "react";
 
@@ -13,6 +14,8 @@ const Appointment = () => {
             alt="logo"
             className="mb-12 h-10 w-fit"
           />
+
+          <AppointmentForm />
 
           <p className="copyright mt-10 py-12">© 2024 CarePluse</p>
         </div>
