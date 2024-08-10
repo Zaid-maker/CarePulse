@@ -9,10 +9,10 @@ import { z } from "zod";
 
 import { SelectItem } from "@/components/ui/select";
 import { Doctors } from "@/constants";
-// import {
-//   createAppointment,
-//   updateAppointment,
-// } from "@/lib/actions/appointment.actions";
+import {
+  createAppointment,
+  updateAppointment,
+} from "@/lib/actions/appointment.actions";
 import { getAppointmentSchema } from "@/lib/validation";
 import { Appointment } from "@/types/appwrite.types";
 
@@ -70,7 +70,29 @@ export const AppointmentForm = ({
         status = "pending";
     }
 
-    setIsLoading(false)
+    try {
+      if (type === "create" && patientId) {
+        const appointment = {
+          userId,
+          patient: patientId,
+          primaryPhysician: values.primaryPhysician,
+          schedule: new Date(values.schedule),
+          reason: values.reason!,
+          status: status as Status,
+          note: values.note,
+        };
+
+        const newAppointment = await createAppointment(appointment);
+
+        if (newAppointment) {
+          form.reset();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
   };
 
   let buttonLabel;
