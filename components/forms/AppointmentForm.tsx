@@ -103,11 +103,11 @@ export const AppointmentForm = ({
           type,
         };
 
-        const updatedAppointment = await updateAppointment(appointmentToUpdate);
+        // const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
-        if (updatedAppointment) {
-          form.reset();
-        }
+        // if (updatedAppointment) {
+        //   form.reset();
+        // }
       }
     } catch (error) {
       console.log(error);
