@@ -91,6 +91,25 @@ export const AppointmentForm = ({
           );
         }
       }
+      // } else {
+      //   const appointmentToUpdate = {
+      //     userId,
+      //     appointmentId: appointment?.$id!,
+      //     appointment: {
+      //       primaryPhysician: values.primaryPhysician,
+      //       schedule: new Date(values.schedule),
+      //       status: status as Status,
+      //       cancellationReason: values.cancellationReason,
+      //     },
+      //     type,
+      //   };
+
+      //   const updatedAppointment = await updateAppointment(appointmentToUpdate);
+
+      //   if (updatedAppointment) {
+      //     form.reset();
+      //   }
+      // }
     } catch (error) {
       console.log(error);
     }
