@@ -164,7 +164,7 @@ export const AppointmentForm = ({
             </CustomFormField>
 
             <CustomFormField
-              fieldType={FormFieldType.CHECKBOX}
+              fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="schedule"
               label="Expected appointment date"
