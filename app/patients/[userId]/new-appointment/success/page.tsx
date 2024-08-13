@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -32,6 +33,36 @@ const RequestSuccess = async ({
           </h2>
           <p>We&apos;ll be in touch shortly to confirm.</p>
         </section>
+
+        <section className="request-details">
+          <p>Requested appointment details: </p>
+          <div className="flex items-center gap-3">
+            {/* <Image
+              src={doctor?.image!}
+              alt="doctor"
+              width={100}
+              height={100}
+              className="size-6"
+            /> */}
+            {/* <p className="whitespace-nowrap">Dr. {doctor?.name}</p> */}
+          </div>
+          <div className="flex gap-2">
+            <Image
+              src="/assets/icons/calendar.svg"
+              height={24}
+              width={24}
+              alt="calendar"
+            />
+          </div>
+        </section>
+
+        <Button variant="outline" className="shad-primary-btn" asChild>
+          <Link href={`/patients/${userId}/new-appointment`}>
+            New Appointment
+          </Link>
+        </Button>
+
+        <p className="copyright">© {new Date().getFullYear()} Carepulse</p>
       </div>
     </div>
   );
