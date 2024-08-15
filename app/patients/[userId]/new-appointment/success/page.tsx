@@ -64,6 +64,7 @@ const RequestSuccess = async ({
               width={24}
               alt="calendar"
             />
+            <p> {formatDateTime(appointment.schedule).dateTime}</p>
           </div>
         </section>
 
@@ -73,7 +74,7 @@ const RequestSuccess = async ({
           </Link>
         </Button>
 
-        <p className="copyright">© {new Date().getFullYear()} Carepulse</p>
+        <p className="copyright">© {new Date().getFullYear()} CarePluse</p>
       </div>
     </div>
   );
