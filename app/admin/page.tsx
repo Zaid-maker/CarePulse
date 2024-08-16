@@ -1,3 +1,4 @@
+import { columns } from "@/components/table/columns";
 import { DataTable } from "@/components/table/DataTable";
 import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
 import Image from "next/image";
@@ -32,7 +33,7 @@ const AdminPage = async () => {
 
         <section className="admin-stat">StatCard</section>
 
-        <DataTable columns={[]} data={appointments.documents} />
+        <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   );
