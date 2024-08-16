@@ -31,5 +31,30 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  return <div>DataTable</div>;
+  return (
+    <div className="data-table">
+      <Table className="shad-table">
+        <TableHeader className="bg-dark-200"></TableHeader>
+      </Table>
+      <div className="table-actions">
+        <Button variant='outline' size='sm' className="shad-gray-btn">
+          <Image
+            src="/assets/icons/arrow.svg"
+            width={24}
+            height={24}
+            alt="arrow"
+          />
+        </Button>
+        <Button variant='outline' size='sm' className="shad-gray-btn">
+          <Image
+            src="/assets/icons/arrow.svg"
+            width={24}
+            height={24}
+            alt="arrow "
+            className="rotate-180"
+          />
+        </Button>
+      </div>
+    </div>
+  );
 }
