@@ -31,13 +31,73 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const encryptedKey =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("accessKey")
+      : null;
+
+  useEffect(() => {
+    const accessKey = encryptedKey && decryptKey(encryptedKey);
+
+    if (accessKey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
+      redirect("/");
+    }
+  }, [encryptedKey]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
+
   return (
     <div className="data-table">
       <Table className="shad-table">
-        <TableHeader className="bg-dark-200"></TableHeader>
+        <TableHeader className="bg-dark-200">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id} className="shad-table-row-header">
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+                className="shad-table-row"
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
       </Table>
       <div className="table-actions">
-        <Button variant='outline' size='sm' className="shad-gray-btn">
+        <Button variant="outline" size="sm" className="shad-gray-btn">
           <Image
             src="/assets/icons/arrow.svg"
             width={24}
@@ -45,7 +105,7 @@ export function DataTable<TData, TValue>({
             alt="arrow"
           />
         </Button>
-        <Button variant='outline' size='sm' className="shad-gray-btn">
+        <Button variant="outline" size="sm" className="shad-gray-btn">
           <Image
             src="/assets/icons/arrow.svg"
             width={24}
