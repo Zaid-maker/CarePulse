@@ -1,4 +1,5 @@
 import PatientForm from "@/components/forms/PatientForm";
+import { PasskeyModal } from "@/components/PasskeyModal";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +8,8 @@ const Home = ({ searchParams }: SearchParamProps) => {
 
   return (
     <div className="flex h-screen max-h-screen">
-      {isAdmin && "PassKeyModek"}
+      {isAdmin && <PasskeyModal />}
+
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
