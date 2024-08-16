@@ -31,9 +31,10 @@ export const createAppointment = async (
   }
 };
 
+//  GET RECENT APPOINTMENTS
 export const getRecentAppointmentList = async () => {
   try {
-    const appointments = databases.listDocuments(
+    const appointments = await databases.listDocuments(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       [Query.orderDesc("$createdAt")]
