@@ -50,6 +50,22 @@ export const PasskeyModal = () => {
     router.push("/");
   };
 
+  const validatePasskey = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+      const encryptedKey = encryptKey(passkey);
+
+      localStorage.setItem("accessKey", encryptedKey);
+
+      setOpen(false);
+    } else {
+      setError("Invalid passkey. Please try again.");
+    }
+  };
+
   return (
     <AlertDialog open onOpenChange={setOpen}>
       <AlertDialogContent className="shad-alert-dialog">
@@ -84,7 +100,21 @@ export const PasskeyModal = () => {
               <InputOTPSlot className="shad-otp-slot" index={5} />
             </InputOTPGroup>
           </InputOTP>
+
+          {error && (
+            <p className="shad-error text-14-regular mt-4 flex justify-center">
+              {error}
+            </p>
+          )}
         </div>
+        <AlertDialogFooter>
+          <AlertDialogAction
+            onClick={(e) => validatePasskey(e)}
+            className="shad-primary-btn w-full"
+          >
+            Enter Admin Passkey
+          </AlertDialogAction>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
