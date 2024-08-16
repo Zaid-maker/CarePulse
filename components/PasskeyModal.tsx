@@ -21,8 +21,36 @@ import {
 import { decryptKey, encryptKey } from "@/lib/utils";
 
 export const PasskeyModal = () => {
+  const router = useRouter();
+  const path = usePathname();
+  const [open, setOpen] = useState(false);
+  const [passkey, setPasskey] = useState("");
+  const [error, setError] = useState("");
+
+  const encryptedKey =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("accessKey")
+      : null;
+
+  useEffect(() => {
+    const accessKey = encryptedKey && decryptKey(encryptedKey);
+
+    if (path)
+      if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
+        setOpen(false);
+        router.push("/admin");
+      } else {
+        setOpen(true);
+      }
+  }, [encryptedKey]);
+
+  const closeModal = () => {
+    setOpen(false);
+    router.push("/");
+  };
+
   return (
-    <AlertDialog open>
+    <AlertDialog open onOpenChange={setOpen}>
       <AlertDialogContent className="shad-alert-dialog">
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-start justify-between">
@@ -32,7 +60,7 @@ export const PasskeyModal = () => {
               alt="close"
               width={20}
               height={20}
-              //   onClick={() => closeModal()}
+              onClick={() => closeModal()}
               className="cursor-pointer"
             />
           </AlertDialogTitle>
@@ -41,7 +69,11 @@ export const PasskeyModal = () => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div>
-          <InputOTP maxLength={6}>
+          <InputOTP
+            maxLength={6}
+            value={passkey}
+            onChange={(value) => setPasskey(value)}
+          >
             <InputOTPGroup className="shad-otp">
               <InputOTPSlot className="shad-otp-slot" index={0} />
               <InputOTPSlot className="shad-otp-slot" index={1} />
