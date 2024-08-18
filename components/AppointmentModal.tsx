@@ -3,14 +3,14 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Appointment } from "@/types/appwrite.types";
 
 import { AppointmentForm } from "./forms/AppointmentForm";
@@ -30,7 +30,26 @@ export const AppointmentModal = ({
   title: string;
   description: string;
 }) => {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div>AppointmentModal</div>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant='ghost'
+          className={`capitalize ${type === "schedule" && "text-green-500"}`}
+        >
+          {type}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="shad-dialog sm:max-w-md">
+        <DialogHeader className="mb-4 space-y-3">
+          <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
+          <DialogDescription>
+            Please fill in the following details to {type} appointment
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   )
 }
