@@ -106,6 +106,7 @@ export const AppointmentForm = ({
         // const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
         // if (updatedAppointment) {
+        //   setOpen && setOpen(false);
         //   form.reset();
         // }
       }
@@ -121,9 +122,11 @@ export const AppointmentForm = ({
     case "cancel":
       buttonLabel = "Cancel Appointment";
       break;
-
+    case "schedule":
+      buttonLabel = "Schedule Appointment";
+      break;
     default:
-      buttonLabel = "Submit Appointment";
+      buttonLabel = "Submit Apppointment";
   }
 
   return (
@@ -173,7 +176,7 @@ export const AppointmentForm = ({
             />
 
             <div
-              className={`flex flex-col gap-6  ${
+              className={`flex flex-col gap-6 ${
                 type === "create" && "xl:flex-row"
               }`}
             >
